@@ -1,0 +1,56 @@
+#include <iostream>
+using namespace std;
+#include <vector>
+#include <string>
+
+// Function declare.
+
+// Function to validate weight
+bool isValidWeight(float weight) {
+    const float MIN_WEIGHT = 10.0; // Min valid weight in kg
+    
+    const float MAX_WEIGHT = 150.0;      // Maxi valid weight in kg
+    return weight >= MIN_WEIGHT && weight <= MAX_WEIGHT;
+}
+
+int main() {
+    const int MAX_PUPILS = 30;
+    vector<string> names(MAX_PUPILS);
+    vector<float> initialWeights(MAX_PUPILS);
+    vector<float> finalWeights(MAX_PUPILS);
+    vector<float> weightDifferences(MAX_PUPILS);
+
+    for (int i = 0; i < MAX_PUPILS; ++i) {
+        cout << "Enter the name of pupil " << (i + 1) << ": ";
+        cin >> names[i];
+
+        // Input and valid initial weight
+        cout << "Enter the initial weight of " << names[i] << " (in kg): ";
+        cin >> initialWeights[i];
+        while (!isValidWeight(initialWeights[i])) {
+            cout << "Invalid weight. Please enter a value between 10 and 150 kg." << endl;
+            cout << "Re-enter the initial weight of " << names[i] << " (in kg): ";
+            cin >> initialWeights[i];
+        }
+
+        // Input and valid final weight
+        cout << "Enter the final weight of " << names[i] << " (in kg): ";
+        cin >> finalWeights[i];
+        while (!isValidWeight(finalWeights[i])) {
+            cout << "Invalid weight. Please enter a value between 10 and 150 kg." << endl;
+            cout << "Re-enter the final weight of " << names[i] << " (in kg): ";
+            cin >> finalWeights[i];
+        }
+
+        // Calculate weight difference
+        weightDifferences[i] = finalWeights[i] - initialWeights[i];
+    }
+
+    // Output names and weight differences
+    cout << "Names and Weight Differences of the Pupils:" << endl;
+    for (int i = 0; i < MAX_PUPILS; ++i) {
+        cout << names[i] << ": " << weightDifferences[i] << " kg" << endl;
+    }
+
+    return 0;
+}
